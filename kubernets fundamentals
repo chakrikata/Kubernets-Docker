@@ -1,0 +1,26 @@
+Kubernetes Fundamentals:
+
+Pods  - is a single instance of an application.
+ReplicaSet - will maintain a stable set of replica pods.Make sure 
+             specified number of pods are available in a deployment.
+Deployment - runs multiple replicas of our app and replaces any instance. 
+             Do rollout and rollback changes to app. Very suited for stteless apps
+Service    - provide stable virtual IP address to pods.
+             Service sits infront of pods and acts as a load balancer
+
+Imperative - using kubectl cmds to create pods, deployments, replicasets, service
+
+Declarative - Yaml and kubectl cmds to create pods, deployment, replicasets and service.
+
+Pods: Container is encapsulated into a kubernetes object named POD
+      have one to one relation ship with containers
+      Cannot have multiple container of same kind in a single pod like
+        -  2 NGINX in a single POD serving same purpose is not recomended
+      can have multiple containers in a single POD provided they are not same kind called Side-Car eg: data pullers (req by main container), data pushers (collecting from main container like logs), proxies (writes static data to html files using helper container and reads using main container)..
+         - both can easily communicate as they are in same network space 
+         - share same storage space too
+
+
+
+
+

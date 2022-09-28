@@ -1,0 +1,61 @@
+Why Kubernetes:
+1. Auto healing
+2. Automated rollouts and rollbacks
+3. Service discovery and Load Balancing
+4. Storage Orchestration
+5. Secrets and Configuration management
+6. Automated bin packing
+
+Architecture of kubernetes:
+
+Master :                     
+Kube Controller Manager
+Cloud Controller Manager
+Kube API server
+etcd
+kube-scheduler
+Container run time- Docker
+
+
+Worker Nodes:
+Kubelet
+Kube-proxy
+Container run time- Docker
+
+
+Master Details:
+Kube Controller Manager  - responsible for noticing and responding when nodes, container or endpoints
+                          go down and make decisions to bring up new container in such cases
+    contoller like:
+    Node Controller : noticing and responding when node goes down
+    Replication Controller: responsible for maintaing correct number of pods for every
+                            replciation controller object in the system
+    Endpoints Controller: populates the endpoints object like joins Services and Pods
+    Service Accounts and Token Controller: Creates default accounts and access for new namespaces
+    
+Cloud Controller Manager - run only controllers specific to cloud provider
+                         - on prem will not have this controller
+    Node contoller -checking cloud provider if a node has been deleted after it stops responding
+    Route Controller - for setting up routes in the underlying cloud infra
+    Service Controller - creating,updating ,deleting cloud provider load balancer.
+Kube API server - front end for the kubernetes control plance. It expose
+                  kubernetes API.
+                - CLTtools like kubectl, users and even all master(scheduler,controllermanager,etcd) and worker(kubelet) 
+                  components talk with API server
+etcd            - consistent and highly available key value store for kubernetes
+                  backing store for all cluster data like all master and worker node info
+kube-scheduler  - responsible for distributing containers across multiple Nodes
+                - watches newly created pods with no assigned node and selects a node for them to run on
+
+
+
+Worker details:
+
+kubelet - runs on every nodes in cluster.
+        - responsbile for making sure containers are running in a pod on a node
+kube-proxy - network proxy 
+           - allow network communication to your pods from network inside or outside your cluster
+
+
+
+
