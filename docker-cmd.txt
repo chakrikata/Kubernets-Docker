@@ -1,0 +1,39 @@
+docker version  
+docker login  # to login to docker hub
+docker login -u username -p password
+docker logout
+docker pull chakrikata/imagename:tag
+docker run --name=app1 -p80:80 -d nginx:latest
+docker ps  # to find all the running container
+docker ps -a  # to find all running and stopped containers
+docker ps -a -q # to get only the container id of all running and stopped cont\
+docker exec -it app1 /bin/sh   # to execute commands inside the container like ps -ef (to see all cmds ran in the container)
+docker stop app1
+docker start app1
+docker images   # to see all the images downloaded in local repo
+docker rmi imageid   # to remove image from local repo
+docker rm containterid
+docker rm $(docker ps -a -q)   # this will remove all stopped container using container id from sub commands
+docker rm -f containerid/name  # to remove running container forcefully
+docker tag chakrikata/image:v1 chakrikata/image:v1-release  # to change the tag of an image
+docker push chakrikata/mynginx_image:V1-release   # push image to docker hub
+docker port containerid  #list port mapping of a container
+docker stats   # to display the stats of a running containers
+docker top container-id/name    # to display the running processes of a container
+
+
+
+
+
+Docker File creation:
+mkdir foldername
+
+vi Dockerfile
+
+FROM nginx
+COPY index.html /usr/share/nginx/html
+
+make sure to have the index.html in the same folder as Dockerfile
+
+Bulding Image:
+docker build -t chakrikata/mynginx:v1 .   (path to the docker file)
