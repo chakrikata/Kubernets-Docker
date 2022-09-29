@@ -57,5 +57,6 @@ kube-proxy - network proxy
            - allow network communication to your pods from network inside or outside your cluster
 
 
+kubectl cheatsheet -https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 

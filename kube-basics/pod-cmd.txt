@@ -1,0 +1,18 @@
+kubectl get nodes
+kubectl get nodes -o wide (to get more info)
+
+PODS:
+kubectl run apppod --image chakrikata/image:V1 --generator=run-pod/V1
+kubectl run apppod --image chakrikata/image:V1   (new verson of kubernetes)
+kubectl get po
+kubectl get po -o wide
+kubectl describe pod apppod
+kubectl delete pod apppod
+
+
+
+
+
+
+
+

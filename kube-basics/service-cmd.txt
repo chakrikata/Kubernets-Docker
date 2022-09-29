@@ -1,0 +1,22 @@
+Services - NodePort
+Expose an application running on a set up PODS using diff types of services like
+
+ClusterIP - specific to a cluster, inside cluster can access using cluster ip
+LoadBalancer - for cloud like ALB
+NodePort - access app externally via internet
+           Exposes the service on each worker node's IP at a static NodePort
+           ClusterIP service, to which nodeport service routes is automatically created.
+           port rang- 30000- 32767
+
+        Worker NodePort  -- > Cluster IP Service Port(this is nodeport service port) --> Container Port in a Pod
+        https://worker-node:NodePort --> cluster IP service port --> container port
+
+port: port on which node port service listens in Kubernetes cluster internally
+target port: container port on which our app is running
+NodePort: worker node port on which we can access app
+
+kubectl run apppod --image imagename
+kubectl expose pod apppod --type NodePort --port 80 --name apppodservice
+kubectl expose pod apppod --type NodePort --port 80 --target-port 80 --name apppodservice
+kubectl get service
+kubectl get svc

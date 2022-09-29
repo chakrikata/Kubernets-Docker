@@ -1,0 +1,38 @@
+Hgh Availability or Reliability
+Scaling
+Load Balancing
+Labels and Selectors
+ 
+maintan a stable set of pods at any given point of time
+To avoid overloading of traffic to single pod, we user out of the box using services for pods which are part of ReplicaSet. 
+Labels and Selectors are key items which ties all 3 pod, replicaset and service together.
+
+kubectl create -f replicaset-demo.yml
+
+appVersion: apps/v1
+kind: ReplicaSet
+metadata:
+   name: app01
+   labels:
+     app: app01
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app01
+  template:
+    metadata:
+      labels:
+        app: app01
+    spec:
+      containers:
+        - name: app01
+          image: chakrikata/image:tag
+
+
+kubectl get replicaset
+kubectl get rs
+kubectl describe rs app01
+kubectl expose rs app01 --type NodePort --port 80 --target-port 8080 --name app01svc
+minikube service app01svc --url
+

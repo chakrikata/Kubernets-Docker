@@ -1,0 +1,16 @@
+kubectl get po
+
+kubectl logs apppod
+kubectl logs -f apppod   # to stream the logs
+
+kubectl exec -it apppod -- /bin/bash
+kubectl exec -it my-first-pod env
+kubectl exec -it my-first-pod ls
+
+kubectl get po app01 -o yaml 
+kubectl get po app01 -o yaml > app01.yaml
+
+kubectl delete po app01
+kubectl get all
+kubectl delete svc app01svc
+
