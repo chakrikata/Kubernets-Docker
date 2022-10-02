@@ -1,0 +1,5 @@
+kubectl apply -f pod-def.yaml
+
+kubectl delete -f pod-def.yaml dep-def.yml dep-svc.yml
+kubectl apply -f kube-manifests/
+kubectl delete -f kube-manifests/

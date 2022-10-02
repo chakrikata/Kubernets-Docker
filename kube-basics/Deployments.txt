@@ -1,0 +1,65 @@
+Deployment is a super set of replica set, that is provide more options 
+
+Features:
+Create deployment to rollout ReplicaSet
+Updating the Deployment
+Rolling Back to older deployment - as it saves deployment versions
+Scaling a deployment
+Pausing and Resuming a Deployment
+Deployment status
+Clean up policy - maintains last 10 versions
+canary deployment
+
+kubectl create deployment depapp01 --image stacksimplify/kubenginx:1.0.0
+kubectl get deployment depapp01
+kubectl get deployment
+
+kubectl scale deployment depapp01 --replicas=20 
+kubectl scale deployment depapp01 --replicas=10
+
+kubectl expose deployment depapp01 --type NodePort --port 80 --target-port 80 --name depapp01svc
+minikube service depapp01svc --url
+
+updating deployment with two types:
+1. set image
+kubectl set image deployment/depapp01 <containername>=<container-image:tag> --record true
+To get containername : kubectl get deployment depapp01 -o yaml
+--record true  : to have versioning enable for rollout 
+kubectl set image deployment/depapp01 kubenginx=stacksimplify/kubenginx:2.0.0 --record
+kubectl rollout status deployment/depapp01
+# to see the full history of deployments
+kubectl rollout history deployment/depapp01
+
+kubectl describe deployment depapp01   to check the rolling update/recreate option
+
+
+
+2. edit deployment
+kubectl edit deployment depapp01 --record
+
+
+
+RollBack option:
+kubectl rollout history deployment depapp01 --revision 1
+
+Previous version:
+kubectl rollout undo deploy depapp01
+
+Specific version
+kubectl rollout undo deploy depapp01 --to-revision 3
+
+Restart via rolling:
+kubectl rollout retart deploy depapp01
+
+Pause and Resume Deployments:
+
+kubectl rollout pause deploy depapp01
+kubectl set image deploy depapp01 kubenginx=stacksimplify/kubenginx:4.0.0 --record
+
+Setting cpu and memory
+kubectl set resources deploy depapp01 -c=kubenginx --limits=cpu=20m,memory=30Mi
+
+kubectl rollout resume deploy depapp01
+
+
+

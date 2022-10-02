@@ -36,3 +36,12 @@ kubectl describe rs app01
 kubectl expose rs app01 --type NodePort --port 80 --target-port 8080 --name app01svc
 minikube service app01svc --url
 
+
+update the replicas from 2 to 6 and run below cmds
+kubectl apply -f appreplicaset.yml
+kubectl replace -f appreplicaset.yml
+
+kubectl delete rs app01
+
+
+

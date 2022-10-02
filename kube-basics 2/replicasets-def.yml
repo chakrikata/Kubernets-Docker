@@ -1,0 +1,22 @@
+appVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: pod-replicaset
+  labels: 
+    app: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      name: myapp-pod
+      laebls:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: imagename
+          ports:
+            - containerPort: 80

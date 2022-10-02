@@ -2,6 +2,7 @@ Services - NodePort
 Expose an application running on a set up PODS using diff types of services like
 
 ClusterIP - specific to a cluster, inside cluster can access using cluster ip
+                ex: frontend and backend communication
 LoadBalancer - for cloud like ALB
 NodePort - access app externally via internet
            Exposes the service on each worker node's IP at a static NodePort
@@ -20,3 +21,30 @@ kubectl expose pod apppod --type NodePort --port 80 --name apppodservice
 kubectl expose pod apppod --type NodePort --port 80 --target-port 80 --name apppodservice
 kubectl get service
 kubectl get svc
+
+
+Ingress - is an advanced load balancer which provides context based routing, ssl,
+          SSL redirect and many more (ex: ALB)
+
+externalName - to access externally hosted apps in K8s cluster
+          ex: AWS RDS endpoint by apps in K8S cluster
+
+
+kubectl create deployment depbackend --image stacksimplify/kube-helloworld:1.0.0
+kubectl logs -f podname
+kubectl expose deploy depapp01 --port 8080 --target-port 8080 --name backend-service
+# create a cluster ip, no need to mention --type ClusterIP
+
+Nginx Conf file updated with backend svc and port
+server {
+        proxy_pass http://backend-servie:8080
+}
+
+kubectl create deploy depfrontend --image stacksimplify/kube-frontend-nginx:1.0.0
+kubectl expose deploy deffrontend --type NodePort --port 80 --target-port 80 --name frontend-service
+
+kubectl scale deploy depbackend --replicas 10
+
+
+
+
