@@ -1,0 +1,14 @@
+## creates isolation boundaries from other k8s objects
+# can limit resources like CPU, Memory on per namespace basis
+# kubectl get namespace
+
+# kubectl get all --namespace kube-system
+# kubectl get ns
+# kubectl get all -n kube-system
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev3
+

@@ -14,5 +14,13 @@ kubectl get sc
 kubectl get storageclass
 kubectl get sc,pvc,pv,svc
 
+kubectl get namespace
+kubectl get all --namespace kube-system
+kubectl get ns
+kubectl get all -n kube-system
+kubectl create ns dev1
+
+kubetl apply -f kube-manifests/ -n dev1
+
 
 

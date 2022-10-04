@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev3
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ns-resource-limit
+  namespace: dev3
+spec:
+  hard:
+   requests.cpu: "1"
+   requests.memory: 1Gi
+   limits.cpu: "2"
+   limits.memory: 2Gi
+   pods: "2"
+   configmaps: "5"
+   persistentvolumeclaims: "5"
+   secrets: "5"
+   services: "5"
+---
+appVersion: v1
+kind: LimitRange
+metadata:
+  name: default-cpu-mem-limit-range
+  namespace: dev3
+spec:
+  limits:
+    - default:  #its the limit
+        memory: "512Mi"
+        cpu: "500m"
+      defaultRequest: # its the resource assgined min
+        memory: "256Mi"
+        cpu:  "300m"
+      type: Container
+
+
+
+#kubectl describe limits default-cpu-mem-limit-range -n dev3
+
+
