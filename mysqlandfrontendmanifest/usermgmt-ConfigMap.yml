@@ -1,0 +1,11 @@
+apiversion: v1
+kind: ConfigMap
+metadata:
+  name: Usermgmt-dbcreation-script
+data:
+  mysql_usermgmt.sql: |-
+    DROP DATABASE IF EXISTS usermgmt;
+    CREATE DATABASE usermgmt;
+
+
+
