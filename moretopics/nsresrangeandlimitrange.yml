@@ -6,7 +6,7 @@ metadata:
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: ns-resource-limit
+  name: ns-resource-quota
   namespace: dev3
 spec:
   hard:
@@ -19,6 +19,7 @@ spec:
    persistentvolumeclaims: "5"
    secrets: "5"
    services: "5"
+# kubectl describe quota ns-resource-quota -n dev3
 ---
 appVersion: v1
 kind: LimitRange
