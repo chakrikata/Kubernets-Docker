@@ -1,0 +1,74 @@
+curl -o iam_policy_latest.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://iam_policy_latest.json
+
+# Verify if any existing service account
+kubectl get sa -n kube-system
+
+
+eksctl create iamserviceaccount \
+  --cluster=eksdemo1 \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --attach-policy-arn=arn:aws:iam::180789647333:policy/AWSLoadBalancerControllerIAMPolicy \
+  --override-existing-serviceaccounts \
+  --approve
+
+
+
+# Get IAM Service Account
+eksctl  get iamserviceaccount --cluster eksdemo1
+
+# Verify if any existing service account
+kubectl get sa -n kube-system
+kubectl get sa aws-load-balancer-controller -n kube-system
+
+
+# Verify Helm version
+helm version
+
+# Add the eks-charts repository.
+helm repo add eks https://aws.github.io/eks-charts
+
+# Update your local repo to make sure that you have the most recent charts.
+helm repo update
+
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=eksdemo1 \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  --set region=us-east-1 \
+  --set vpcId=vpc-0165a396e41e292a3 \
+  --set image.repository=602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-load-balancer-controller
+
+
+# Verify that the controller is installed.
+kubectl -n kube-system get deployment 
+kubectl -n kube-system get deployment aws-load-balancer-controller
+kubectl -n kube-system describe deployment aws-load-balancer-controller
+
+
+
+# Verify AWS Load Balancer Controller Webhook service created
+kubectl -n kube-system get svc 
+kubectl -n kube-system get svc aws-load-balancer-webhook-service
+kubectl -n kube-system describe svc aws-load-balancer-webhook-service
+
+
+# Verify Labels in Service and Selector Labels in Deployment
+kubectl -n kube-system get svc aws-load-balancer-webhook-service -o yaml
+kubectl -n kube-system get deployment aws-load-balancer-controller -o yaml
+
+
+# Uninstall AWS Load Balancer Controller
+helm uninstall aws-load-balancer-controller -n kube-system 
+
+
+
+
+
+
+
