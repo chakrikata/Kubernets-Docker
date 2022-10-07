@@ -1,0 +1,11 @@
+1. Enable to group multiple ingress resources together
+2. The controller will automatically merge ingress rules for AllowExternalDNSUpdates
+ingress with in ingress group and support with single AWSLoadBalancerControllerIAMPolicy
+3. Most annotations defined on a ingress only applies to the paths defined by that ingress
+
+  # Ingress Groups
+    alb.ingress.kubernetes.io/group.name: myapps.web
+    alb.ingress.kubernetes.io/group.order: '10'
+
+
+

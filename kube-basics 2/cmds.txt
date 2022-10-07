@@ -20,7 +20,9 @@ kubectl get ns
 kubectl get all -n kube-system
 kubectl create ns dev1
 
-kubetl apply -f kube-manifests/ -n dev1
+kubectl apply -f kube-manifests/ -n dev1
+
+kubectl apply -f -R kube-manifests/
 
 
 

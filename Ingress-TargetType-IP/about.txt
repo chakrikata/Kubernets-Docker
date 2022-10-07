@@ -1,0 +1,8 @@
+Target Types- instance and ip mode
+Instance mode is default and svc should be of nodeport or loadbalancer
+Ip mode- is req for sticky session to work wit alb and fargate using only IP mode
+        Need to define annotation explicity as target-type:ip
+            # Target Type: IP
+    alb.ingress.kubernetes.io/target-type: ip   
+
+
