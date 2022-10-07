@@ -1,0 +1,17 @@
+Uses Fargate Controller that is build using kubernetes upstream, extensible model
+Fargate controller includes a new scheduler that runs ialong side default kubernetes  scheduler
+
+When we start a pod that meets the criteria for running in fargate, fargate controller running
+in the cluster recognize, update and schedue the pod onto fargate
+
+AWS EKS on Fargate:
+
+Bring existing pods 
+    - dont need to change our existing pods
+    - Forgate works with existing workflow and services that run on kubernetes
+
+
+
+
+
+
