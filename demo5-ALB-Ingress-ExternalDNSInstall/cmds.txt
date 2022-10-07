@@ -25,6 +25,8 @@ kubectl get external-dns
 eksctl get iamserviceaccount --cluster eksdemo1
 
 
+# Verify External DNS logs
+kubectl logs -f $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
 
 
 
