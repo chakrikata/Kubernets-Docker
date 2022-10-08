@@ -1,0 +1,52 @@
+https://aws.amazon.com/elasticloadbalancing/features/
+
+
+Options for creating NLB using EKS cluster
+
+AWS colud Provider load balancer controller - legay
+Create classic LB and NLB
+
+
+AWS Load Balancer Controller - newest
+Create NLB and ALB
+Supports protocols TCP,UDP and TLS(SSL) for health check it
+supports TCP, HTTP and https
+Supports Instance and IP mode(for fargate)
+Supports internal and external NLB and Custom Subnet discovery
+Supports static elastic IP and Access Controls
+supports 25+ annotations
+
+
+How to make sure NLB created is associated wth only lates AWSLB controller
+
+
+If used below annotations, it will got for AWS Cloud Provider LB Controller(legacy)
+service.beta.kubernetes.io/aws-load-balancer-type: nlb
+
+
+If used below annotations it will select latest AWS LB Controller
+service.beta.kubernetes.io/aws-load-balancer-type: external  (Deprecated)
+or 
+service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
+
+
+Below conditions will create NLB
+Kind: service
+service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
+and Spec.Type: LoadBalancer
+
+For ALB, we need kind: Ingress
+
+
+Architecture
+
+
+K8s Admin using kubectl --> K8s api server --> AWS Load Balancer Controller
+--> created a Kubernetes LB Service --> with Listener:80, LB Type: External, target-Type: Instance, Health Check Settings,
+Scheme: Internet-facing, Source Range: 0.0.0.0/0
+
+
+
+
+
+

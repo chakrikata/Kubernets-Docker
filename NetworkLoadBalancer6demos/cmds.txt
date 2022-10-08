@@ -1,0 +1,6 @@
+# Delete or Undeploy kube-manifests
+kubectl delete -f kube-manifests/
+
+# Verify if NLB deleted 
+In AWS Mgmt Console, 
+Go to Services -> EC2 -> Load Balancing -> Load Balancers

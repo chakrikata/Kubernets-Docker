@@ -1,0 +1,3 @@
+Imp Note 1: You must specify the same number of eip allcoations as load balancer subnets association
+    If no of subnets mentioned in NLB service manifest, then same numbe of eip should exist
+Imp Note 2: NLB must be internet facing.
