@@ -21,5 +21,26 @@ My SQL External Name SPace service for UMS to communicate
 
 
 
+eksctl create fargateprofile -f kube-manifests/01-Fargate-Advanced-Profiles/01-fargate-profiles.yml
+
+# List Fargate profiles
+eksctl get fargateprofile --cluster eksdemo1
+
+# View in yaml format
+eksctl get fargateprofile --cluster eksdemo1 -o yaml
+
+
+nslookup ums.lubecloud.com = nslookup end point of load balancer
+
+# delete Apps
+kubectl delete -R -f kube-manifests/02-Applications/
+
+# Get list of Fargate Profiles in a cluster
+eksctl get fargateprofile --cluster eksdemo1
+
+# Delete Fargate Profile
+eksctl delete fargateprofile --cluster <cluster-name> --name <Fargate-Profile-Name> --wait
+eksctl delete fargateprofile --cluster eksdemo1 --name fp-app2 --wait
+eksctl delete fargateprofile --cluster eksdemo1 --name fp-ums --wait
 
 
