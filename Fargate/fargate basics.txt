@@ -1,0 +1,28 @@
+AWS EKS Fargate profile - Create fargate profile - fp-dev
+
+Create ingress service ALB with SSL, SSL - redirect, external DNS
+
+step 1 - udpate eksctl 
+step 2 - Check ALB Ingress Controller and External-DNS
+kubectl get pods -n kube-system to check alb ingress pods
+kubectl get pods  to cehck external dns pods
+
+Step 3- Create Fargate Profile
+eksctl get fargateprofile --cluster eksdemo1
+
+eksctl create fargateprofile --cluster eksdemo1 \
+                             --name fp-demo \
+                             --namespace fp-dev
+
+The above cmd will create FargatePodExecutionRole for the first time
+
+We cannot use Worker Node Node Ports for Fargate Pods for two reasons
+Fargate Pods are created in Private Subnets, so no access to internet to access
+Fargate Pods are created on random worker nodes whose information is unknown to us to use NodePort Service
+
+
+# Delete Fargate Profile
+eksctl delete fargateprofile --cluster <cluster-name> --name <Fargate-Profile-Name> --wait
+eksctl delete fargateprofile --cluster eksdemo1 --name fp-demo --wait
+
+

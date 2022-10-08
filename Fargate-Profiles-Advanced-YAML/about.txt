@@ -1,0 +1,25 @@
+Architecture:
+
+
+3 records in RDS:
+app1.kubecloud.com
+app2.kubecloud.com
+ums.kubecloud.com
+EKS-Managed Nodes:
+
+Priv Subnet- App1-NS
+pub subnet- App1 Ingress part of APP1-NS, 
+App2 Ingress part of App2 NS and UMS-Ingress part of USM Ns
+Note: Ingress with cross namespace is not supported.
+Which is why we are creating multiple ingress for multipls Name Space NS
+
+
+Fargate:
+Priv Subnet- App2-NS, UMS-Ns
+
+My SQL External Name SPace service for UMS to communicate
+
+
+
+
+

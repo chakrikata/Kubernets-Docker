@@ -10,6 +10,28 @@ Bring existing pods
     - dont need to change our existing pods
     - Forgate works with existing workflow and services that run on kubernetes
 
+production ready: 1 pod = 1 fargate instance
+    - Launch Pods easily
+    - Easily run pods across AZs for have
+    - Each pod runs in an isolated compute environment
+
+so kubectl get nodes = kubectl get pods
+
+Righsized and Integrated:
+    - only pay for resoruces you need to run your pods
+    - Includes native AWS integrations for networking and security
+
+
+EKS deployment Options with Fargate:
+    - Only EC2 Node Groups (managed and unmanaged EC2 nodes)
+    - Mixed (like EC2 managed nodes, unmanaged nodes, fargate)
+    - Only Fargate 
+
+EKS deployment options with EC2 Managed Node Groups: We can deploy EC2 managed node groups in public and provate subnets in a vpc
+
+EKS deployment options with Fargate: Pods on fargate runs only on private subnets
+
+
 
 
 
