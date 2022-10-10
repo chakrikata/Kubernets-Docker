@@ -1,0 +1,24 @@
+Increasing or decreasing number of replicas (pod)
+HPA Automatically scales no of pods in a deployment, replication controller or replica set, stateful set based on the resource utilisation
+This helps apps to scale ou to meet increased demand and scale in when resource are not needed
+
+we have to set target CPU utilisation percentage, so HPA will try to meet this target
+HPA needs kubernetes metrics server to verify CPU metrics of pod
+
+
+HPA is availabel by default.
+
+
+HPA Requires 
+- scaling metric- CPU utilisation
+- Target value CPU - 50%
+- Min Replicas  - 2
+- Max Replicas  - 5
+
+
+CMD:
+kubectl autoscale deployment demo-dep1 --cpu-percent=50 --min=1 --max=3
+
+
+
+

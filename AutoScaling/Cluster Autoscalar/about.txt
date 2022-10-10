@@ -1,0 +1,7 @@
+automatically adjusts the size of kubernetes cluster when one of the following condition is true:
+
+- pods that failed to run in the cluster due to resource insufficient
+- there are node in cluster that have been under utilised for an extended period of time
+    and their pods can be place on existing nodes
+
+Modified worker node group by slace in or out 

@@ -1,0 +1,33 @@
+VAP autoamtically adjusts CPU and memory reservations for pods to hep right size your app
+This adjustment can improve cluter resource utilisation and free up CPU and memory for other pods
+
+Benifit:
+Cluster nodes are effectively used, as pods use exactly as they need
+pods are scheduled onto nodes that have the appropriate resources available
+also we dont have to run time-consuming benchmarking tasks to determine teh correct values for CPU and memory Requires
+Maintenance time reduced, as autoscalar adjust CPU and memory req over time with out any action on our part
+
+
+
+                        VPA COmponents
+
+    VPA Admission Hook   -->  VPA Recommender   --> VPA Updater
+
+
+VPA Admission Hook
+    Every pod submitted goes throught this webhook automatically which check
+    whether a VPA object referencing this pod or one of it parents(replica set , deployment)
+
+VPA Recommender 
+    Connects to metrics-server in cluster, fetches historical and current usage of cpu, memory for
+    each pod and generates recommendation for scalling up or down the request, limits of pods
+
+VPA Updater
+    Runs every 1 min. If a pod is not running in the calculated recommendation range, it evicts current running pod
+    so it can restart and go throught the VPA admission hook which will change the cpu and memory settings for it
+
+
+
+
+
+
