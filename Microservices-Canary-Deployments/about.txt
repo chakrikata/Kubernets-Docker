@@ -1,0 +1,41 @@
+Canaries measn incremental rollouts
+with canaries, the new version of the app is slowly deployed to the Kubenetes
+cluster while getting a very small amount of live traffic
+In short, a subset of live users are connecting to new version while the rest use previous version
+
+Using canaries, we can detect deployment issues very early while they effect small subset of users
+
+if any issues, the prod traffic can simply be revered to older version
+
+                                client
+                                
+                            User-management-Micro service
+
+
+        V1-Notification-MicroService                V2-Notification-MicroService
+
+
+
+NS V1 Replicas	NS V2 Replicas	Traffic Distribution
+4	                0	         100% traffic to NS V1 Version
+3	                1	         25% traffic to NS V2 Version
+2	                2	        50% traffic to NS V2 Version
+1	                3	        75% traffic to NS V2 Version
+0	                4	        100% traffic to NS V2 Version
+
+
+
+Downside:
+we need to incrementally increase pods based on percentage distribution for canary
+if there are few pods, its feasible
+But if there are huge no, then it becomes difficult
+
+Best Approach:
+AWS App Mesh - number of pods number will not share. App mesh gateway will send diff percentage with the existing pods
+
+Best option for canary is Istio(open source) and AWS AppMesh (AWS version of Istio)
+
+
+
+
+
