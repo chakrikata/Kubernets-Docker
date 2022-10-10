@@ -1,0 +1,34 @@
+Helps Analyse and Debug distributed apps built using micro services architecture
+we can understand how our app underlying services are performing to identiy the root cause of performance issues or error
+provided end to end view of requests as they travel through the app and show a map of underlying components
+can use it in dev and prod to analyse app
+
+Benifits:
+Review req behaviour
+Discover app issues
+improve app performance
+ready to use with AWS
+
+
+AWS Xray --> Collect traces  --> record traces or combine to singular units called traces --> view service map --> analyse issues
+
+
+Daemon Set ensures that all or some nodes run a copy of prod
+- As nodes are added to the cluster, pods are added to them
+- As nodes are removed, those pods are garbage collected
+- Deleting a Daemon set will clean up the pods it created
+
+
+example:
+running a logs collection daemon on every node (fluentd)
+running a node monitoring daemon on every node (cloud watch agent)
+running an app trace collection daemon on every node (xray)
+
+
+
+architecture:
+
+
+Xray pod in workernodes - xray cluster ip service
+
+
