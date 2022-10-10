@@ -1,0 +1,58 @@
+Source          --> Build               --> Test                    --> Deploy              --> Monitoring
+Aws Code Commit  --> Aws Code Build --> Aws Code Build+Third pary --> Code Build + Kubectl --> Cloud watch container Insights
+
+Use AWS Code pipeline to bring all above steps together
+
+Steps To Perform:
+We are going to create a ECR Repository for our Docker Images
+We are going to create Code Commit Git Repository and check-in our Docker and Kubernetes Manifests
+We will write a buildspec.yml which will eventually build a docker image, push the same to ECR Repository and Deploy the updated k8s Deployment manifest to EKS Cluster.
+To achive all this we need also create or update few roles
+STS Assume Role: EksCodeBuildKubectlRole
+Inline Policy: eksdescribe
+CodeBuild Role: codebuild-eks-devops-cb-for-pipe-service-role
+ECR Full Access Policy: AmazonEC2ContainerRegistryFullAccess
+STS Assume Policy: eks-codebuild-sts-assume-role
+STS Assume Role: EksCodeBuildKubectlRole
+
+Pre-Requsite:
+
+We are going to deploy a application which will also have a ALB Ingress Service and also will register its DNS name in Route53 using External DNS
+Which means we should have both related pods running in our cluster.
+# Verify alb-ingress-controller pod running in namespace kube-system
+kubectl get pods -n kube-system
+
+# Verify external-dns pod running in default namespace
+kubectl get pods
+
+
+Create ECR Repository for our Application Docker Images
+
+Create CodeCommit Repository
+
+Create STS Assume IAM Role for CodeBuild to interact with AWS EKS
+
+Update EKS Cluster aws-auth ConfigMap with new role created in previous step
+
+Review the buildspec.yml for CodeBuild & Environment Variables
+Environment Variables for CodeBuild
+REPOSITORY_URI = 180789647333.dkr.ecr.us-east-1.amazonaws.com/eks-devops-nginx
+EKS_KUBECTL_ROLE_ARN = arn:aws:iam::180789647333:role/EksCodeBuildKubectlRole
+EKS_CLUSTER_NAME = eksdemo1
+
+Create CodePipeline
+
+Updae CodeBuild Role to have access to ECR full access
+
+Update CodeBuild Role to have access to STS Assume Role we have created using STS Assume Role Policy
+
+Make changes to index.html file
+
+Add change to Ingress manifest
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+Comes with pre packaged build environment
+Or
+We can also use managed or custom docker images for custom build env 
+
+Scales automatically
+compiles our source code, runs unit test and produces artifacts
+
+AWS COde Build:
+
+
+Build Env --> AWS Managed Image, EC2 container registry, External Container Registry (Docker Hub)
+
+Source --> AWS Code Commit, S3, Git hub, Bit Bucket
+
+Build Artifacts --> S3
+
+Build Logs --> Cloud Watch Logs
+
+Build Notifications --> SNS
+
+
+Imp Process to tell how build should happen: buildspec.yml
+
+
+
+
+
+

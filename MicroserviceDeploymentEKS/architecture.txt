@@ -1,0 +1,28 @@
+                            AWS Cloud                               Route 53 and ACM
+                            AWS EKS Cluster
+
+                            VPC
+
+
+    AZ1                                             AZ2
+public subnet 1                                 public subnet 2
+                            ALB
+NAT Gateway             UMS-Ingress Service       NAT Gateway
+
+
+Priv SUbnet1                                    Priv Subnet 2
+                        UMS-Nodeport SVC
+        UMSPod                                      UMSPod
+
+RDS DB                   MYSQL-Extername svc           RDS DB  
+
+                        Notification - ClusterIP Service
+
+        NS prod                                         NS Pod
+                        SMTP - External Name Service                                SES(Simple Email Service)
+
+
+
+
+
+
